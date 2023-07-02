@@ -29,6 +29,36 @@
         <button>View Details</button>
       </template>
     </Card>
+
+    <NameList>
+      <template v-slot:default="slotProps">
+        {{ slotProps.firstName }} {{ slotProps.lastName }}
+      </template>
+    </NameList>
+    <NameList>
+      <template v-slot:default="slotProps">
+        {{ slotProps.lastName }} , {{ slotProps.firstName }}
+      </template>
+    </NameList>
+    <NameList>
+      <template v-slot:default="slotProps">
+        {{ slotProps.firstName }}
+      </template>
+    </NameList>
+
+    <h4>App Component Text Style</h4>
+    <ChildStyle />
+
+    <button @click="activeTab = 'TabA'">TabA</button>
+    <button @click="activeTab = 'TabB'">TabB</button>
+    <button @click="activeTab = 'TabC'">TabC</button>
+
+    <!-- <TabA v-if="activeTab === 'TabA'" />
+    <TabB v-if="activeTab === 'TabB'" />
+    <TabC v-if="activeTab === 'TabC'" /> -->
+    <keep-alive>
+      <component :is="activeTab" />
+    </keep-alive>
   </div>
 </template>
 
@@ -39,6 +69,11 @@
   import Popup from "./components/Popup.vue"
   import Input from "./components/Input.vue"
   import Card from "./components/Card.vue"
+  import NameList from "./components/NameList.vue"
+  import ChildStyle from "./components/ChildStyle.vue"
+  import TabA from "./components/TabA.vue"
+  import TabB from "./components/TabB.vue"
+  import TabC from "./components/TabC.vue"
 
   export default {
     name: "App",
@@ -49,12 +84,18 @@
       Popup,
       Input,
       Card,
+      NameList,
+      ChildStyle,
+      TabA,
+      TabB,
+      TabC,
     },
     data() {
       return {
         name: 'Nano',
         channel: 'Team Coding',
         showPopup: false,
+        activeTab: 'TabA',
       }
     },
     methods: {
@@ -87,5 +128,8 @@
     background-color: coral;
     color: #fff;
     border-radius: 8px;
+  }
+  h4 {
+    color: red;
   }
 </style>
